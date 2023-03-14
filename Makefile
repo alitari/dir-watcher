@@ -1,13 +1,13 @@
 DOCKER_REGISTRY ?= localhost:5001
 DOCKER_REPO = alitari
-DOCKER_IMAGE_NAME = watchdir
+DOCKER_IMAGE_NAME = dir-watcher
 DOCKER_IMAGE_TAG = latest
 
 INOTIFYWAIT_ARGS ?= "-e create -e moved_from -e modify"
 
 COMMAND ?= "echo"
 
-build: watchdir.sh Dockerfile .dockerignore
+build: dir-watcher.sh Dockerfile .dockerignore
 	docker build -t $(DOCKER_REGISTRY)/$(DOCKER_REPO)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG) .
 
 push: build

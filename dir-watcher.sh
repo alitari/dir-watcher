@@ -21,16 +21,16 @@ if [[ -z $1 ]]; then
     echo "no directory to watch supplied"
     exit 1
 fi
-watchdir=$1
+dir=$1
 
 trap stop_watching SIGINT
 
-echo "Start watching  '$watchdir' ..."
+echo "Start watching  '$dir' ..."
 echo "inotifywait arguments: $INOTIFYWAIT_ARGS"
 echo "delay: $DELAY"
 
 while true; do
-    inotifywait -r -m $INOTIFYWAIT_ARGS $watchdir | while read path action file; do
+    inotifywait -r -m $INOTIFYWAIT_ARGS $dir | while read path action file; do
         # execute command if last execution was more than 1 second ago
         if [[ $(date +%s) -gt $((time + $DELAY)) ]]; then
             time=$(date +%s)

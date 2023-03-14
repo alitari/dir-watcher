@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: dir-watcher
-          image: "localhost:5001/alitari/watchdir:latest"
+          image: "localhost:5001/alitari/dir-watcher:latest"
           imagePullPolicy: Always
           env:
             - name: INOTIFYWAIT_ARGS
@@ -43,5 +43,5 @@ metadata:
   name: dir-watcher-config
 data:
   test.txt: |
-    a content
+    a contentdddddd
 

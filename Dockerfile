@@ -7,6 +7,6 @@ RUN apk add --no-cache \
     jq \
     && rm -rf /var/cache/apk/*
 
-COPY watchdir.sh /
+COPY dir-watcher.sh /
 
-ENTRYPOINT ["/watchdir.sh"]
+ENTRYPOINT ["/dir-watcher.sh"]
