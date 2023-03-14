@@ -1,0 +1,47 @@
+# k8s deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dir-watcher
+  labels:
+    app: dir-watcher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dir-watcher
+  template:
+    metadata:
+      labels:
+        app: dir-watcher
+    spec:
+      containers:
+        - name: dir-watcher
+          image: "localhost:5001/alitari/watchdir:latest"
+          imagePullPolicy: Always
+          env:
+            - name: INOTIFYWAIT_ARGS
+              value: ""
+            - name: DELAY
+              value: ""
+            - name: COMMAND
+              value: ""
+          args:
+            - "/data"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          configMap:
+            name: dir-watcher-config
+---
+# configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dir-watcher-config
+data:
+  test.txt: |
+    a content
+
