@@ -1,0 +1,22 @@
+name: Workflow
+
+on:
+  pull_request:
+    branches: [ "master" ]
+  push:
+    branches: [ "master" ]
+
+jobs:
+
+  release-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: docker login
+      run: |
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u alitari --password-stdin
+
+    - name: push to dockerhub
+      run: |
+        make push DOCKER_REGISTRY=docker.io
