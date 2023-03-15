@@ -14,7 +14,7 @@ INOTIFYWAIT_ARGS=${INOTIFYWAIT_ARGS:--e create -e moved_from -e modify}
 DELAY=${DELAY:-1}
 
 # command to execute when a inotify event is triggered (default: echo)
-COMMAND=${COMMAND:-echo}
+#COMMAND=${COMMAND:-echo}
 
 set -e
 if [[ -z $1 ]]; then
@@ -34,9 +34,7 @@ while true; do
         # execute command if last execution was more than 1 second ago
         if [[ $(date +%s) -gt $((time + $DELAY)) ]]; then
             time=$(date +%s)
-            export IONOTIFY_EVENT_FILE=$path$file
-            export IONOTIFY_EVENT_ACTION=$action
-            $COMMAND
+            eval "$COMMAND"
         fi
     done
 done
