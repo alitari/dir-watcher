@@ -34,7 +34,9 @@ while true; do
         # execute command if last execution was more than 1 second ago
         if [[ $(date +%s) -gt $((time + $DELAY)) ]]; then
             time=$(date +%s)
-            $COMMAND "$path$file" "$action"
+            export IONOTIFY_EVENT_FILE=$path$file
+            export IONOTIFY_EVENT_ACTION=$action
+            $COMMAND
         fi
     done
 done
