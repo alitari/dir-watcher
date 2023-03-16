@@ -8,7 +8,7 @@ function stop_watching {
 
 # inotifywait arguments defaults to "-e create -e moved_from -e modify"
 # you can override it by setting the INOTIFYWAIT_ARGS environment variable
-INOTIFYWAIT_ARGS=${INOTIFYWAIT_ARGS:--e create -e moved_from -e modify}
+INOTIFYWAIT_ARGS=${INOTIFYWAIT_ARGS:--e create -e moved_from -e modify -e delete}
 
 # delay in seconds between two executions of the command (default: 1)
 DELAY=${DELAY:-1}
